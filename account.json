@@ -1,0 +1,927 @@
+{
+  "heading": "Account",
+  "description": "API reference for retrieving account information and seeing all possible account types and subtypes",
+  "endpoints": [
+    {
+      "endpoint": "/account",
+      "heading": "Get account information",
+      "description": "The account endpoint makes a request to the profile service for gamer pic, gamerscore, gamertag, account tier, Xbox One rep, preferred color, real name, bio, and location.",
+      "method": "GET",
+      "hash": "account",
+      "breakdown": {
+          "response": {
+            "profileUsers": {
+              "type": "object",
+              "description": "Accounts object.",
+              "hash": "account-profileUsers",
+              "subitems": {
+                "id": {
+                  "type": "string",
+                  "description": "The Xbox User ID (XUID) is a unique identifier for the user.",
+                  "hash": "account-profileUsers-id"
+                },
+                "hostId": {
+                  "type": "string",
+                  "description": "This value is the same as the Xbox User ID (XUID).",
+                  "hash": "account-profileUsers-hostId"
+                },
+                "settings": {
+                  "type": "object",
+                  "description": "Array of key-value pairs for requested information.",
+                  "hash": "account-profileUsers-settings",
+                  "subitems": {
+                    "id": {
+                      "type": "string",
+                      "description": "The key identifier for the supplied value.",
+                      "hash": "account-profileUsers-settings-id"
+                    },
+                    "value": {
+                      "type": "string",
+                      "description": "The value for the specified key identifier.",
+                      "hash": "account-profileUsers-settings-value"
+                    }
+                  }
+                },
+                "isSponsoredUser": {
+                  "type": "boolean",
+                  "description": "Guest Users, also known as Sponsored Guests or Guest Accounts, allow players to interact with many Xbox Live services without needing to create a full Xbox Live account.",
+                  "hash": "account-profileUsers-isSponsoredUser"
+                }
+              }
+            }
+          }
+      },
+      "examples": {
+        "response": {
+          "profileUsers": [
+            {
+              "id": "2533274798129181",
+              "hostId": "2533274798129181",
+              "settings": [
+                {
+                  "id": "GameDisplayPicRaw",
+                  "value": "https://images-eds-ssl.xboxlive.com/image?url=wHwbXKif8cus8csoZ03RW_ES.ojiJijNBGRVUbTnZKsoCCCkjlsEJrrMqDkYqs3MBhMLdvWFHLCswKMlApTSbzvES1cjEAVPrczatfOc0jR0Ss4zHEy6ErElLAY8rAVFRNqPmGHxiumHSE9tZRnlghsACzaoisWEww1VSUd9Sx0-&format=png"
+                },
+                {
+                  "id": "Gamerscore",
+                  "value": "19165"
+                },
+                {
+                  "id": "Gamertag",
+                  "value": "xTACTICSx"
+                },
+                {
+                  "id": "AccountTier",
+                  "value": "Gold"
+                },
+                {
+                  "id": "XboxOneRep",
+                  "value": "GoodPlayer"
+                },
+                {
+                  "id": "PreferredColor",
+                  "value": "http://dlassets.xboxlive.com/public/content/ppl/colors/00003.json"
+                },
+                {
+                  "id": "RealName",
+                  "value": "David Regimbal"
+                },
+                {
+                  "id": "Bio",
+                  "value": "Changing the world one semicolon at a time"
+                },
+                {
+                  "id": "Location",
+                  "value": "United States"
+                }
+              ],
+              "isSponsoredUser": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "endpoint": "/account/{xuids}",
+      "heading": "Get account information for specified users",
+      "description": "The account endpoint makes a request to the people hub service for gamer pic, gamerscore, gamertag, account tier, Xbox One rep, preferred color, real name, bio, and location.",
+      "method": "GET",
+      "hash": "accountXuid",
+	    "breakdown": {
+        "response": {
+          "people": {
+            "type": "object",
+            "description": "People object.",
+            "hash": "accountXuid-people",
+            "subitems": {
+              "xuid": {
+                "type": "string",
+                "description": "The Xbox User ID (XUID) is a unique identifier for the user.",
+                "hash": "accountXuid-people-xuid"
+              },
+              "isFavorite": {
+                "type": "boolean",
+                "description": "Determines if this user is a favorite of the request caller.",
+                "hash": "accountXuid-people-isFavorite"
+              },
+              "isFollowingCaller": {
+                "type": "boolean",
+                "description": "Determines if this user is following the request caller.",
+                "hash": "accountXuid-people-isFollowingCaller"
+              },
+              "isFollowedByCaller": {
+                "type": "boolean",
+                "description": "Determines if this user is followed by the request caller.",
+                "hash": "accountXuid-people-isFollowedByCaller"
+              },
+              "isIdentityShared": {
+                "type": "boolean",
+                "description": "Determines if this user has shared their identity.",
+                "hash": "accountXuid-people-isIdentityShared"
+              },
+              "addedDateTimeUtc": {
+                "type": "timestamp",
+                "description": "Gets the timestamp, if set, of when the user was added.",
+                "hash": "accountXuid-people-addedDateTimeUtc"
+              },
+              "displayName": {
+                "type": "string",
+                "description": "The custom display name set by the user.",
+                "hash": "accountXuid-people-displayName"
+              },
+              "realName": {
+                "type": "string",
+                "description": "Provides the real name for the owner of the account.",
+                "hash": "accountXuid-people-realName"
+              },
+              "displayPicRaw": {
+                "type": "string",
+                "description": "Provides the gamer pic URL.",
+                "hash": "accountXuid-people-displayPicRaw"
+              },
+              "showUserAsAvatar": {
+                "type": "string",
+                "description": "Identifier to determine if this user elected to show as their Avatar.",
+                "hash": "accountXuid-people-showUserAsAvatar"
+              },
+              "gamertag": {
+                "type": "string",
+                "description": "The unique gamertag set for this user and compatible with Xbox 360.",
+                "hash": "accountXuid-people-gamertag"
+              },
+              "gamerscore": {
+                "type": "string",
+                "description": "The total gamer score earned by this user.",
+                "hash": "accountXuid-people-gamerscore"
+              },
+              "modernGamertag": {
+                "type": "string",
+                "description": "The gamertag set for this user using the new Xbox One configuration.",
+                "hash": "accountXuid-people-modernGamertag"
+              },
+              "modernGamertagSuffix": {
+                "type": "string",
+                "description": "The gamertag suffix set for this user using the new Xbox One configuration.",
+                "hash": "accountXuid-people-modernGamertagSuffix"
+              },
+              "uniqueModernGamertag": {
+                "type": "string",
+                "description": "The combined modern gamertag and suffix which represents the unique gamertag for the user.",
+                "hash": "accountXuid-people-uniqueModernGamertag"
+              },
+              "xboxOneRep": {
+                "type": "string",
+                "description": "Returns the Xbox One reputation score for this user.",
+                "hash": "accountXuid-people-xboxOneRep"
+              },
+              "presenceState": {
+                "type": "string",
+                "description": "Provides the current state of the user; i.e. 'Online'",
+                "hash": "accountXuid-people-presenceState"
+              },
+              "presenceText": {
+                "type": "string",
+                "description": "Provides the current activity of the user; i.e. 'Playing Halo Infinite'",
+                "hash": "accountXuid-people-presenceText"
+              },
+              "presenceDevices": {
+                "type": "null",
+                "description": "Returns the list of devices the user is on.",
+                "hash": "accountXuid-people-presenceDevices"
+              },
+              "isBroadcasting": {
+                "type": "boolean",
+                "description": "Determines if the user is streaming live.",
+                "hash": "accountXuid-people-isBroadcasting"
+              },
+              "isCloaked": {
+                "type": "boolean",
+                "hash": "accountXuid-people-isCloaked"
+              },
+              "isQuarantined": {
+                "type": "boolean",
+                "hash": "accountXuid-people-isQuarantined"
+              },
+              "isXbox360Gamerpic": {
+                "type": "boolean",
+                "hash": "accountXuid-people-isXbox360Gamerpic"
+              },
+              "lastSeenDateTimeUtc": {
+                "type": "timestamp",
+                "description": "Provides the datetime of when the user was last seen.",
+                "hash": "accountXuid-people-lastSeenDateTimeUtc"
+              },
+              "suggestion": {
+                "type": "null",
+                "hash": "accountXuid-people-suggestion"
+              },
+              "recommendation": {
+                "type": "null",
+                "hash": "accountXuid-people-recommendation"
+              },
+              "search": {
+                "type": "null",
+                "hash": "accountXuid-people-search"
+              },
+              "titleHistory": {
+                "type": "null",
+                "hash": "accountXuid-people-titleHistory"
+              },
+              "multiplayerSummary": {
+                "type": "null",
+                "hash": "accountXuid-people-multiplayerSummary"
+              },
+              "recentPlayer": {
+                "type": "null",
+                "hash": "accountXuid-people-recentPlayer"
+              },
+              "follower": {
+                "type": "null",
+                "hash": "accountXuid-people-follower"
+              },
+              "preferredColor": {
+                "type": "object",
+                "description": "Returns the primary, secondary and tertiary color set by the user.",
+                "hash": "accountXuid-people-preferredColor",
+                "subitems": {
+                  "primaryColor": {
+                    "type": "string",
+                    "hash": "accountXuid-people-preferredColor-primaryColor"
+                  },
+                  "secondaryColor": {
+                    "type": "string",
+                    "hash": "accountXuid-people-preferredColor-secondaryColor"
+                  },
+                  "tertiaryColor": {
+                    "type": "string",
+                    "hash": "accountXuid-people-preferredColor-tertiaryColor"
+                  }
+                }
+              },
+              "presenceDetails": {
+                "type": "null",
+                "hash": "accountXuid-people-presenceDetails"
+              },
+              "titlePresence": {
+                "type": "null",
+                "hash": "accountXuid-people-titlePresence"
+              },
+              "titleSummaries": {
+                "type": "null",
+                "hash": "accountXuid-people-titleSummaries"
+              },
+              "presenceTitleIds": {
+                "type": "null",
+                "hash": "accountXuid-people-presenceTitleIds"
+              },
+              "detail": {
+                "type": "null",
+                "hash": "accountXuid-people-detail"
+              },
+              "communityManagerTitles": {
+                "type": "null",
+                "hash": "accountXuid-people-communityManagerTitles"
+              },
+              "socialManager": {
+                "type": "null",
+                "hash": "accountXuid-people-socialManager"
+              },
+              "broadcast": {
+                "type": "null",
+                "hash": "accountXuid-people-broadcast"
+              },
+              "avatar": {
+                "type": "null",
+                "hash": "accountXuid-people-avatar"
+              },
+              "linkedAccounts": {
+                "type": "array",
+                "hash": "accountXuid-people-linkedAccounts"
+              },
+              "colorTheme": {
+                "type": "string",
+                "hash": "accountXuid-people-colorTheme"
+              },
+              "preferredFlag": {
+                "type": "string",
+                "hash": "accountXuid-people-preferredFlag"
+              },
+              "preferredPlatforms": {
+                "type": "array",
+                "hash": "accountXuid-people-preferredPlatforms"
+              }
+            }
+          },
+          "recommendationSummary": {
+            "type": "null",
+            "hash": "accountXuid-recommendationSummary"
+          },
+          "friendFinderState": {
+            "type": "null",
+            "hash": "accountXuid-friendFinderState"
+          },
+          "accountLinkDetails": {
+            "type": "null",
+            "hash": "accountXuid-accountLinkDetails"
+          }
+        }
+      },
+      "examples": {
+        "response": {
+          "people": [
+            {
+              "xuid": "2533274798129181",
+              "isFavorite": false,
+              "isFollowingCaller": false,
+              "isFollowedByCaller": false,
+              "isIdentityShared": false,
+              "addedDateTimeUtc": null,
+              "displayName": "xTACTICSx",
+              "realName": "",
+              "displayPicRaw": "https://images-eds-ssl.xboxlive.com/image?url=wHwbXKif8cus8csoZ03RW_ES.ojiJijNBGRVUbTnZKsoCCCkjlsEJrrMqDkYqs3MBhMLdvWFHLCswKMlApTSbzvES1cjEAVPrczatfOc0jR0Ss4zHEy6ErElLAY8rAVFRNqPmGHxiumHSE9tZRnlghsACzaoisWEww1VSUd9Sx0-&format=png",
+              "showUserAsAvatar": "1",
+              "gamertag": "xTACTICSx",
+              "gamerScore": "19165",
+              "modernGamertag": "xTACTICSx",
+              "modernGamertagSuffix": "",
+              "uniqueModernGamertag": "xTACTICSx",
+              "xboxOneRep": "GoodPlayer",
+              "presenceState": "Online",
+              "presenceText": "Online",
+              "presenceDevices": null,
+              "isBroadcasting": false,
+              "isCloaked": true,
+              "isQuarantined": false,
+              "isXbox360Gamerpic": false,
+              "lastSeenDateTimeUtc": null,
+              "suggestion": null,
+              "recommendation": null,
+              "search": null,
+              "titleHistory": null,
+              "multiplayerSummary": null,
+              "recentPlayer": null,
+              "follower": null,
+              "preferredColor": {
+                "primaryColor": "193e91",
+                "secondaryColor": "101836",
+                "tertiaryColor": "102c69"
+              },
+              "presenceDetails": null,
+              "titlePresence": null,
+              "titleSummaries": null,
+              "presenceTitleIds": null,
+              "detail": null,
+              "communityManagerTitles": null,
+              "socialManager": null,
+              "broadcast": null,
+              "avatar": null,
+              "linkedAccounts": [],
+              "colorTheme": "gamerpicblur",
+              "preferredFlag": "",
+              "preferredPlatforms": []
+            }
+          ],
+          "recommendationSummary": null,
+          "friendFinderState": null,
+          "accountLinkDetails": null
+        }
+      }
+    },
+    {
+      "endpoint": "/search/{gamertag}",
+      "heading": "Find other players by gamertag",
+      "description": "This endpoint uses the people hub service to return 15 results for user detail, preferred color via gamertag.",
+      "method": "GET",
+      "hash": "accountSearch",
+      "breakdown": {
+          "response": {
+            "people": {
+              "type": "object",
+              "description": "People object.",
+              "hash": "account-search",
+              "subitems": {
+                "xuid": {
+                  "type": "string",
+                  "description": "The Xbox User ID (XUID) is a unique identifier for the user.",
+                  "hash": "account-search-people-xuid"
+                },
+                "isFavorite": {
+                  "type": "boolean",
+                  "description": "Determines if this user is a favorite of the request caller.",
+                  "hash": "account-search-people-isFavorite"
+                },
+                "isFollowingCaller": {
+                  "type": "boolean",
+                  "description": "Determines if this user is following the request caller.",
+                  "hash": "account-search-people-isFollowingCaller"
+                },
+                "isFollowedByCaller": {
+                  "type": "boolean",
+                  "description": "Determines if this user is followed by the request caller.",
+                  "hash": "account-search-people-isFollowedByCaller"
+                },
+                "isIdentityShared": {
+                  "type": "boolean",
+                  "description": "Determines if this user has shared their identity.",
+                  "hash": "account-search-people-isIdentityShared"
+                },
+                "addedDateTimeUtc": {
+                  "type": "timestamp",
+                  "description": "Gets the timestamp, if set, of when the user was added.",
+                  "hash": "account-search-people-addedDateTimeUtc"
+                },
+                "displayName": {
+                  "type": "string",
+                  "description": "The custom display name set by the user.",
+                  "hash": "account-search-people-displayName"
+                },
+                "realName": {
+                  "type": "string",
+                  "description": "Provides the real name for the owner of the account.",
+                  "hash": "account-search-people-realName"
+                },
+                "displayPicRaw": {
+                  "type": "string",
+                  "description": "Provides the gamer pic URL.",
+                  "hash": "account-search-people-displayPicRaw"
+                },
+                "showUserAsAvatar": {
+                  "type": "boolean",
+                  "description": "Identifier to determine if this user elected to show as their Avatar.",
+                  "hash": "account-search-people-showUserAsAvatar"
+                },
+                "gamertag": {
+                  "type": "string",
+                  "description": "The unique gamertag set for this user and compatible with Xbox 360.",
+                  "hash": "account-search-people-gamertag"
+                },
+                "gamerScore": {
+                  "type": "timestamp",
+                  "description": "The total gamer score earned by this user.",
+                  "hash": "account-search-people-gamerScore"
+                },
+                "modernGamertag": {
+                  "type": "timestamp",
+                  "description": "The gamertag set for this user using the new Xbox One configuration.",
+                  "hash": "account-search-people-modernGamertag"
+                },
+                "modernGamertagSuffix": {
+                  "type": "timestamp",
+                  "description": "The gamertag suffix set for this user using the new Xbox One configuration.",
+                  "hash": "account-search-people-modernGamertagSuffix"
+                },
+                "uniqueModernGamertag": {
+                  "type": "timestamp",
+                  "description": "The combined modern gamertag and suffix which represents the unique gamertag for the user.",
+                  "hash": "account-search-people-uniqueModernGamertag"
+                },
+                "xboxOneRep": {
+                  "type": "string",
+                  "description": "Returns the Xbox One reputation score for this user.",
+                  "hash": "account-search-people-xboxOneRep"
+                },
+                "presenceState": {
+                  "type": "string",
+                  "description": "Provides the current state of the user; i.e. 'Online'",
+                  "hash": "account-search-people-presenceState"
+                },
+                "presenceText": {
+                  "type": "string",
+                  "description": "Provides the current activity of the user; i.e. 'Playing Halo Infinite'",
+                  "hash": "account-search-people-presenceText"
+                },
+                "presenceDevices": {
+                  "type": "null",
+                  "description": "Returns the list of devices the user is on.",
+                  "hash": "account-search-people-presenceDevices"
+                },
+                "isBroadcasting": {
+                  "type": "boolean",
+                  "description": "Determines if the user is streaming live.",
+                  "hash": "account-search-people-isBroadcasting"
+                },
+                "isCloaked": {
+                  "type": "boolean",
+                  "hash": "account-search-people-isCloaked"
+                },
+                "isQuarantined": {
+                  "type": "boolean",
+                  "hash": "account-search-people-isQuarantined"
+                },
+                "isXbox360Gamerpic": {
+                  "type": "boolean",
+                  "hash": "account-search-people-isXbox360Gamerpic"
+                },
+                "lastSeenDateTimeUtc": {
+                  "type": "timestamp",
+                  "description": "Provides the datetime of when the user was last seen.",
+                  "hash": "account-search-people-lastSeenDateTimeUtc"
+                },
+                "suggestion": {
+                  "type": "null",
+                  "hash": "account-search-people-suggestion"
+                },
+                "recommendation": {
+                  "type": "null",
+                  "hash": "account-search-people-recommendation"
+                },
+                "search": {
+                  "type": "object",
+                  "hash": "account-search-people-search",
+                  "subitems": {
+                      "type": {
+                        "type": "string",
+                        "hash": "account-search-people-search-type"
+                      },
+                      "reasons": {
+                        "type": "array",
+                        "hash": "account-search-people-search-reasons"
+                      }
+                  }
+                },
+                "titleHistory": {
+                  "type": "null",
+                  "hash": "account-search-people-titleHistory"
+                },
+                "multiplayerSummary": {
+                  "type": "null",
+                  "hash": "account-search-people-multiplayerSummary"
+                },
+                "recentPlayer": {
+                  "type": "null",
+                  "hash": "account-search-people-recentPlayer"
+                },
+                "follower": {
+                  "type": "null",
+                  "hash": "account-search-people-follower"
+                },
+                "preferredColor": {
+                  "type": "object",
+                  "description": "Returns the primary, secondary and tertiary color set by the user.",
+                  "hash": "accountXuid-people-people-preferredColor",
+                  "subitems": {
+                    "primaryColor": {
+                      "type": "string",
+                      "hash": "accountXuid-people-people-preferredColor-primaryColor"
+                    },
+                    "secondaryColor": {
+                      "type": "string",
+                      "hash": "accountXuid-people-people-preferredColor-secondaryColor"
+                    },
+                    "tertiaryColor": {
+                      "type": "string",
+                      "hash": "accountXuid-people-people-preferredColor-tertiaryColor"
+                    }
+                  }
+                },
+                "presenceDetails": {
+                  "type": "null",
+                  "hash": "account-search-people-presenceDetails"
+                },
+                "titlePresence": {
+                  "type": "null",
+                  "hash": "account-search-people-titlePresence"
+                },
+                "titleSummaries": {
+                  "type": "null",
+                  "hash": "account-search-people-titleSummaries"
+                },
+                "presenceTitleIds": {
+                  "type": "null",
+                  "hash": "account-search-people-presenceTitleIds"
+                },
+                "detail": {
+                  "type": "object",
+                  "hash": "account-search-people-detail",
+                  "subitems": {
+                    "accountTier": {
+                      "type": "string",
+                      "hash": "account-search-people-detail-accountTier"
+                    },
+                    "bio": {
+                      "type": "string",
+                      "hash": "account-search-people-detail-bio"
+                    },
+                    "isVerified": {
+                      "type": "boolean",
+                      "hash": "account-search-people-detail-isVerified"
+                    },
+                    "location": {
+                      "type": "string",
+                      "hash": "account-search-people-detail-location"
+                    },
+                    "tenure": {
+                      "type": "string",
+                      "hash": "account-search-people-detail-tenure"
+                    },
+                    "watermarks": {
+                      "type": "array",
+                      "hash": "account-search-people-detail-watermarks"
+                    },
+                    "blocked": {
+                      "type": "boolean",
+                      "hash": "account-search-people-detail-blocked"
+                    },
+                    "mute": {
+                      "type": "false",
+                      "hash": "account-search-people-detail-mute"
+                    },
+                    "followerCount": {
+                      "type": "integer",
+                      "hash": "account-search-people-detail-followerCount"
+                    },
+                    "followingCount": {
+                      "type": "integer",
+                      "hash": "account-search-people-detail-followingCount"
+                    },
+                    "hasGamePass": {
+                      "type": "boolean",
+                      "description": "Determines if this user has an active Game Pass subscription.",
+                      "hash": "account-search-people-detail-hasGamePass"
+                    }
+                  }
+                },
+                "communityManagerTitles": {
+                  "type": "null",
+                  "hash": "account-search-people-communityManagerTitles"
+                },
+                "socialManager": {
+                  "type": "null",
+                  "hash": "account-search-people-socialManager"
+                },
+                "broadcast": {
+                  "type": "null",
+                  "hash": "account-search-people-broadcast"
+                },
+                "avatar": {
+                  "type": "string",
+                  "hash": "account-search-avatar"
+                },
+                "linkedAccounts": {
+                  "type": "object",
+                  "hash": "account-search-people-linkedAccounts"
+                },
+                "colorTheme": {
+                  "type": "string",
+                  "hash": "account-search-people-colorTheme"
+                },
+                "preferredFlag": {
+                  "type": "string",
+                  "hash": "account-search-people-preferredFlag"
+                },
+                "preferredPlatforms": {
+                  "type": "object",
+                  "hash": "account-search-people-preferredPlatforms"
+                }
+              }
+            },
+            "recommendationSummary": {
+              "type": "null",
+              "hash": "account-search-recommendationSummary"
+            },
+            "friendFinderState": {
+              "type": "null",
+              "hash": "account-search-friendFinderState"
+            },
+            "accountLinkDetails": {
+              "type": "null",
+              "hash": "account-search-accountLinkDetails"
+            }
+          }
+      },
+      "examples": {
+        "response": {
+          "people": [
+            {
+              "xuid": "2533274798129181",
+              "isFavorite": false,
+              "isFollowingCaller": false,
+              "isFollowedByCaller": false,
+              "isIdentityShared": false,
+              "addedDateTimeUtc": null,
+              "displayName": null,
+              "realName": "",
+              "displayPicRaw": "https://images-eds-ssl.xboxlive.com/image?url=wHwbXKif8cus8csoZ03RW_ES.ojiJijNBGRVUbTnZKsoCCCkjlsEJrrMqDkYqs3MBhMLdvWFHLCswKMlApTSbzvES1cjEAVPrczatfOc0jR0Ss4zHEy6ErElLAY8rAVFRNqPmGHxiumHSE9tZRnlghsACzaoisWEww1VSUd9Sx0-&format=png",
+              "showUserAsAvatar": "1",
+              "gamertag": "xTACTICSx",
+              "gamerScore": "19165",
+              "modernGamertag": "xTACTICSx",
+              "modernGamertagSuffix": "",
+              "uniqueModernGamertag": "xTACTICSx",
+              "xboxOneRep": "GoodPlayer",
+              "presenceState": null,
+              "presenceText": null,
+              "presenceDevices": null,
+              "isBroadcasting": false,
+              "isCloaked": null,
+              "isQuarantined": false,
+              "isXbox360Gamerpic": false,
+              "lastSeenDateTimeUtc": null,
+              "suggestion": null,
+              "recommendation": null,
+              "search": {
+                "Type": "None",
+                "Reasons": []
+              },
+              "titleHistory": null,
+              "multiplayerSummary": null,
+              "recentPlayer": null,
+              "follower": null,
+              "preferredColor": {
+                "primaryColor": "193e91",
+                "secondaryColor": "101836",
+                "tertiaryColor": "102c69"
+              },
+              "presenceDetails": null,
+              "titlePresence": null,
+              "titleSummaries": null,
+              "presenceTitleIds": null,
+              "detail": {
+                "accountTier": "Gold",
+                "bio": null,
+                "isVerified": false,
+                "location": null,
+                "tenure": null,
+                "watermarks": [],
+                "blocked": false,
+                "mute": false,
+                "followerCount": 40,
+                "followingCount": 34,
+                "hasGamePass": false
+              },
+              "communityManagerTitles": null,
+              "socialManager": null,
+              "broadcast": null,
+              "avatar": null,
+              "linkedAccounts": null,
+              "colorTheme": "gamerpicblur",
+              "preferredFlag": "",
+              "preferredPlatforms": []
+            }
+          ],
+          "recommendationSummary": null,
+          "friendFinderState": null,
+          "accountLinkDetails": null
+        }
+      }
+    },
+    {
+      "endpoint": "/alerts",
+      "heading": "Get user notifications",
+      "description": "This endpoint uses the comments service to return alerts.",
+      "method": "GET",
+      "hash": "alerts",
+      "breakdown": {
+          "response": {
+            "alerts": {
+              "type": "objects",
+              "hash": "alerts",
+              "subitems": {
+                "id": {
+                  "type": "string",
+                  "hash": "alerts-id"
+                },
+                "action": {
+                  "type": "string",
+                  "hash": "alerts-action"
+                },
+                "path": {
+                  "type": "string",
+                  "hash": "alerts-path"
+                },
+                "actorXuid": {
+                  "type": "string",
+                  "hash": "alerts-actorXuid"
+                },
+                "actorGamertag": {
+                  "type": "string",
+                  "hash": "alerts-actorGamertag"
+                },
+                "parentType": {
+                  "type": "string",
+                  "hash": "alerts-parentType"
+                },
+                "parentPath": {
+                  "type": "string",
+                  "hash": "alerts-parentPath"
+                },
+                "ownerXuid": {
+                  "type": "string",
+                  "hash": "alerts-ownerXuid"
+                },
+                "ownerGamertag": {
+                  "type": "string",
+                  "hash": "alerts-ownerGamertag"
+                },
+                "timestamp": {
+                  "type": "timestamp",
+                  "hash": "alerts-timestamp"
+                },
+                "seen": {
+                  "type": "boolean",
+                  "hash": "alerts-seen"
+                },
+                "rootPath": {
+                  "type": "string",
+                  "hash": "alerts-rootPath"
+                },
+                "clubId": {
+                  "type": "string",
+                  "hash": "alerts-clubId"
+                }
+              }
+            }
+          }
+      },
+      "examples": {
+        "response": {
+          "alerts": [
+            {
+              "id": "08587232084657218732_430928276_2533274795899722",
+              "action": "Like",
+              "path": "comments.xboxlive.com/screenshotsmetadata.xboxlive.com/users/xuid(2533274798129181)/scids/72010100-7d7f-4105-b34e-3ec552a4c121/screenshots/47cb19df-2283-44fb-ae18-4fe277ff205d/likes/xuid(2533274795899722)",
+              "actorXuid": "2533274795899722",
+              "actorGamertag": "GATORLAlD",
+              "parentType": "Screenshot",
+              "parentPath": "screenshotsmetadata.xboxlive.com/users/xuid(2533274798129181)/scids/72010100-7d7f-4105-b34e-3ec552a4c121/screenshots/47cb19df-2283-44fb-ae18-4fe277ff205d",
+              "ownerXuid": "2533274798129181",
+              "ownerGamertag": "xTACTICSx",
+              "timestamp": "2016-11-06T02:13:39.7557075Z",
+              "seen": true,
+              "rootPath": "screenshotsmetadata.xboxlive.com/users/xuid(2533274798129181)/scids/72010100-7d7f-4105-b34e-3ec552a4c121/screenshots/47cb19df-2283-44fb-ae18-4fe277ff205d",
+              "clubId": "0"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "endpoint": "/generate/gamertag",
+      "heading": "Generate random gamertags",
+      "description": "This endpoint uses the user management service to generate random gamertags that are available.",
+      "method": "POST",
+      "hash": "generateGamertags",
+      "breakdown": {
+          "request": {
+            "algorithm": {
+              "type": "integer",
+              "hash": "generateGamertags-algorithm"
+            },
+            "count": {
+              "type": "integer",
+              "hash": "generateGamertags-count"
+            },
+            "seed": {
+              "type": "string",
+              "hash": "generateGamertags-seed"
+            },
+            "locale": {
+              "type": "string",
+              "hash": "generateGamertags-locale"
+            }
+          },
+          "response": {
+            "gamertags": {
+              "type": "array",
+              "hash": "generateGamertags-gamertags"
+            }
+          }
+      },
+      "examples": {
+        "request": {
+          "algorithm": 1,
+          "count": 3,
+          "seed": "",
+          "locale": "en-US"
+        },
+        "response": {
+          "Gamertags": [
+            "ShadowYard22009",
+            "BackCookie22017",
+            "GivenBell320978"
+          ]
+        }
+      }
+    }
+  ]
+}
