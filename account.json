@@ -1,4 +1,5 @@
 {
+  "$git": "https://github.com/OpenXBL/Docs/blob/main/account.json",
   "heading": "Account",
   "description": "API reference for retrieving account information and seeing all possible account types and subtypes",
   "endpoints": [
