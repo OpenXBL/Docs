@@ -126,7 +126,7 @@ paths:
   '/api/v2/{xuid}/presence':
     get:
       tags:
-        - friends
+        - account
       summary: 'Presence for comma-separated list of specific XUIDs.'
       operationId: 91f58589c0a1183f4a1475d30fa46e18
       parameters:
@@ -227,6 +227,41 @@ paths:
         - achievements
       summary: 'Return a player title achievement list for specified game.'
       operationId: 2686a724484d67c711160d1ec99f15c0
+      parameters:
+        -
+          name: xuid
+          in: path
+          description: XUID
+          required: true
+          schema:
+            type: string
+          examples:
+            string:
+              summary: 'An XUID'
+              value: '2535473210914202'
+        -
+          name: titleId
+          in: path
+          description: 'Title ID'
+          required: true
+          schema:
+            type: string
+          examples:
+            string:
+              summary: 'Title ID'
+              value: '1777860928'
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  '/api/v2/achievements/x360/{xuid}/title/{titleId}':
+    get:
+      tags:
+        - achievements
+      summary: 'Return a player title achievement list for specified Xbox 360 game.'
+      operationId: 04a4ed8c809edac3a1a1938e4e42b77f
       parameters:
         -
           name: xuid
@@ -576,13 +611,33 @@ paths:
               properties:
                 name:
                   type: string
-                type:
-                  type: string
-                  enum: [public, private, hidden]
               type: object
               example:
                 name: 'My OpenXBL Club'
-                type: public
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  '/api/v2/clubs/delete/{clubId}':
+    get:
+      tags:
+        - clubs
+      summary: 'Delete a club by id.'
+      operationId: 6c36381ad6332a518ebbb2b4ec7e2e41
+      parameters:
+        -
+          name: clubId
+          in: path
+          description: 'Club ID'
+          required: true
+          schema:
+            type: string
+          examples:
+            string:
+              summary: 'A club id.'
+              value: '3379887449511665'
       responses:
         '200':
           description: Success
@@ -873,7 +928,7 @@ paths:
   /api/v2/gamepass/pc:
     get:
       tags:
-        - marketplace
+        - gamepass
       summary: 'Return list of PC  Games.'
       operationId: f06d8ba143b9ac8800d50f13d5699803
       responses:
@@ -882,12 +937,12 @@ paths:
       security:
         -
           api_key: []
-  /api/v2/gamepass/ea=play:
+  /api/v2/gamepass/ea-play:
     get:
       tags:
-        - marketplace
+        - gamepass
       summary: 'Return list of EA Play Games.'
-      operationId: 938566ba1bf50002b2409d2fc597d71f
+      operationId: d0822deaf6091c976fe3dfa39193d6e7
       responses:
         '200':
           description: Success
