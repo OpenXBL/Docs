@@ -1,0 +1,1424 @@
+openapi: 3.0.0
+info:
+  title: 'OpenXBL API'
+  version: '3.0'
+paths:
+  /api/v2/account:
+    get:
+      tags:
+        - account
+      summary: 'Get your profile information.'
+      operationId: ccce99fde8cbd99daf13797af3b6ea67
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  '/api/v2/account/{xuid}':
+    get:
+      tags:
+        - account
+      summary: 'Get someone elses profile information.'
+      operationId: b0c47054af3030d3e9a29b56a4eecdf3
+      parameters:
+        -
+          name: xuid
+          in: path
+          description: 'This can be a single value or an array of values.'
+          required: true
+          schema:
+            type: string
+          examples:
+            string:
+              summary: 'An array of XUIDs'
+              value: '2535473210914202,2535473210914202'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                example:
+                  profileUsers: [{ id: '2533274798129181', hostId: '2533274798129181', settings: [{ id: GameDisplayPicRaw, value: 'https://images-eds-ssl.xboxlive.com/image?url=wHwbXKif8cus8csoZ03RW_ES.ojiJijNBGRVUbTnZKsoCCCkjlsEJrrMqDkYqs3MBhMLdvWFHLCswKMlApTSbzvES1cjEAVPrczatfOc0jR0Ss4zHEy6ErElLAY8rAVFRNqPmGHxiumHSE9tZRnlghsACzaoisWEww1VSUd9Sx0-&format=png' }, { id: Gamerscore, value: '19165' }, { id: Gamertag, value: xTACTICSx }, { id: AccountTier, value: Gold }, { id: XboxOneRep, value: GoodPlayer }, { id: PreferredColor, value: 'http://dlassets.xboxlive.com/public/content/ppl/colors/00003.json' }, { id: RealName, value: 'David Regimbal' }, { id: Bio, value: 'Changing the world one semicolon at a time' }, { id: Location, value: 'United States' }], isSponsoredUser: false }]
+      security:
+        -
+          api_key: []
+  '/api/v2/search/{gamertag}':
+    get:
+      tags:
+        - account
+      summary: 'Find other players by gamertag.'
+      operationId: b08a2819410ca558026b8c07eae0dc43
+      parameters:
+        -
+          name: gamertag
+          in: path
+          description: Gamertag
+          required: true
+          schema:
+            type: string
+          examples:
+            string:
+              summary: 'A gamertag.'
+              value: xTACTICSx
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/alerts:
+    get:
+      tags:
+        - account
+      summary: 'Get your alerts.'
+      operationId: 8c365fb4acd114064e860e9be0c9839f
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/generate/gamertag:
+    post:
+      tags:
+        - account
+      summary: 'Generate a random gamertag.'
+      operationId: f2ed600bb3505d337bb2878e34c8858f
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                algorithm:
+                  type: integer
+                count:
+                  type: integer
+                seed:
+                  type: string
+                locale:
+                  type: string
+              type: object
+              example:
+                algorithm: 1
+                count: 3
+                seed: ''
+                locale: en-US
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/presence:
+    get:
+      tags:
+        - friends
+      summary: 'Get the presence of all your friends.'
+      operationId: 287ae5d778ce9aa00742f7640ef117c1
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  '/api/v2/{xuid}/presence':
+    get:
+      tags:
+        - friends
+      summary: 'Presence for comma-separated list of specific XUIDs.'
+      operationId: 91f58589c0a1183f4a1475d30fa46e18
+      parameters:
+        -
+          name: xuid
+          in: path
+          description: XUIDs
+          required: true
+          schema:
+            type: string
+          examples:
+            string:
+              summary: XUID
+              value: '2535473210914202,2533274791718062'
+            'string[]':
+              summary: 'List of XUIDs'
+              value: '2535473210914202,2533274791718062'
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/achievements:
+    get:
+      tags:
+        - achievements
+      summary: 'Return your achievement list.'
+      operationId: 5875d239b4c697b18bd0f0d2ae4f60d6
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  '/api/v2/achievements/player/{xuid}':
+    get:
+      tags:
+        - achievements
+      summary: 'Return a player achievement list.'
+      operationId: b81493968299257ad338170292736d18
+      parameters:
+        -
+          name: xuid
+          in: path
+          description: XUID
+          required: true
+          schema:
+            type: string
+          examples:
+            string:
+              summary: 'An XUID'
+              value: '2535473210914202'
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  '/api/v2/achievements/player/{xuid}/{titleId}':
+    get:
+      tags:
+        - achievements
+      summary: 'Return a player achievement list for specified game.'
+      operationId: 0e89f4e29ea053410fbc1fc128ef8752
+      parameters:
+        -
+          name: xuid
+          in: path
+          description: XUID
+          required: true
+          schema:
+            type: string
+          examples:
+            string:
+              summary: 'An XUID'
+              value: '2535473210914202'
+        -
+          name: titleId
+          in: path
+          description: 'Title ID'
+          required: true
+          schema:
+            type: string
+          examples:
+            string:
+              summary: 'Title ID'
+              value: '1777860928'
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  '/api/v2/achievements/player/{xuid}/title/{titleId}':
+    get:
+      tags:
+        - achievements
+      summary: 'Return a player title achievement list for specified game.'
+      operationId: 2686a724484d67c711160d1ec99f15c0
+      parameters:
+        -
+          name: xuid
+          in: path
+          description: XUID
+          required: true
+          schema:
+            type: string
+          examples:
+            string:
+              summary: 'An XUID'
+              value: '2535473210914202'
+        -
+          name: titleId
+          in: path
+          description: 'Title ID'
+          required: true
+          schema:
+            type: string
+          examples:
+            string:
+              summary: 'Title ID'
+              value: '1777860928'
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  '/api/v2/achievements/stats/{titleId}':
+    get:
+      tags:
+        - achievements
+      summary: 'Return your stats for a specified game.'
+      operationId: ba69e51582c40261cf8fa362c6cda5c0
+      parameters:
+        -
+          name: titleId
+          in: path
+          description: 'Title ID'
+          required: true
+          schema:
+            type: string
+          examples:
+            string:
+              summary: 'Title ID'
+              value: '1777860928'
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  '/api/v2/achievements/title/{titleId}':
+    get:
+      tags:
+        - achievements
+      summary: 'Return your stats for a specified game.'
+      operationId: 903f805b1f5aeafcc08a89e95002789b
+      parameters:
+        -
+          name: titleId
+          in: path
+          description: 'Title ID'
+          required: true
+          schema:
+            type: string
+          examples:
+            string:
+              summary: 'Title ID'
+              value: '1777860928'
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  '/api/v2/achievements/title/{titleId}/{continuationToken}':
+    get:
+      tags:
+        - achievements
+      summary: 'Return your stats for a specified game.'
+      operationId: da4d817e0bc7e468d0c5fb89ccffc94b
+      parameters:
+        -
+          name: titleId
+          in: path
+          description: 'Title ID'
+          required: true
+          schema:
+            type: string
+          examples:
+            string:
+              summary: 'Title ID'
+              value: '1777860928'
+        -
+          name: continuationToken
+          in: path
+          description: 'Continuation Token (used for paging)'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  '/api/v2/achievements/{titleIds}':
+    get:
+      tags:
+        - achievements
+      summary: 'Return your stats for a specified game.'
+      operationId: 30499430eb5000dfaf277c7c7589ac9d
+      parameters:
+        -
+          name: titleIds
+          in: path
+          description: 'Comma-separated list of title ids.'
+          required: true
+          schema:
+            type: string
+          examples:
+            string:
+              summary: 'Title ID'
+              value: '1777860928'
+            'string[]':
+              summary: 'List of Title IDs'
+              value: '1777860928,1144039928'
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/activity/feed:
+    get:
+      tags:
+        - activity
+      summary: 'Get activity feed.'
+      operationId: ba169e34c55c62cd41348d4612d8fa01
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+    post:
+      tags:
+        - activity
+      summary: 'Post to activity feed.'
+      operationId: 003d4c3c45441901e8da117b6032eb9e
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                message:
+                  type: string
+              type: object
+              example:
+                message: 'I am trying out OpenXBL!'
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/activity/history:
+    get:
+      tags:
+        - activity
+      summary: 'Get activity history.'
+      operationId: 26b946348c05ac7b9cfdedc22343157b
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/activity/share:
+    post:
+      tags:
+        - activity
+      summary: 'Creates a shareable link.'
+      operationId: e505eac5d25589dcaa38e44900a1429d
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                locator:
+                  type: string
+              type: object
+              example:
+                locator: gameclipsmetadata.xboxlive.com/users/xuid(2533274798129181)/scids/00000000-0000-0000-0000-000000000000/clips/2f2773a3-2588-4208-99ef-ee3a33a827fa
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/clubs/recommendations:
+    post:
+      tags:
+        - clubs
+      summary: 'Get club recommendations.'
+      operationId: d79ed47d9504f78c8d056c0ca3698f72
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  '/api/v2/clubs/{clubId}':
+    get:
+      tags:
+        - clubs
+      summary: 'Get club details.'
+      operationId: 704b4456a645c67dde5f0b3bf4d01dad
+      parameters:
+        -
+          name: clubId
+          in: path
+          description: 'The club id.'
+          required: true
+          schema:
+            type: string
+          examples:
+            string:
+              summary: 'Club ID'
+              value: '3379887449511665'
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  '/api/v2/clubs/{clubId}/invite/{xuid}':
+    post:
+      tags:
+        - clubs
+      summary: 'Invite someone to a club.'
+      operationId: baf2a19f7634e32bc57ffe560770a0d3
+      parameters:
+        -
+          name: clubId
+          in: path
+          description: 'Club ID'
+          required: true
+          schema:
+            type: string
+          examples:
+            string:
+              summary: 'A club id.'
+              value: '3379887449511665'
+        -
+          name: xuid
+          in: path
+          description: XUID
+          required: true
+          schema:
+            type: string
+          examples:
+            string:
+              summary: 'A xuid.'
+              value: '2780570662795584'
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/clubs/owned:
+    get:
+      tags:
+        - clubs
+      summary: 'Get clubs owned by current user.'
+      operationId: 6b33c03dd910868b7affa52747a68e7e
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/clubs/create:
+    post:
+      tags:
+        - clubs
+      summary: 'Create a new club.'
+      operationId: 890206ec6aa35455b1a2934a3a9e97a6
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                type:
+                  description: 'Open/Public = 1, Private/Closed = 2, Hidden/Secret = 3'
+                  type: integer
+                  enum: [1, 2, 3]
+                name:
+                  type: string
+              type: object
+              example:
+                name: 'My OpenXBL Club'
+                type: 1
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/clubs/find:
+    get:
+      tags:
+        - clubs
+      summary: 'Find clubs based off query.'
+      operationId: 2b49c5e73669969d47d8e4ffd15da836
+      parameters:
+        -
+          name: q
+          in: query
+          description: 'The search query.'
+          required: true
+          schema:
+            type: string
+          examples:
+            string:
+              summary: 'Describe what to search for.'
+              value: Halo
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/clubs/reserve:
+    post:
+      tags:
+        - clubs
+      summary: 'Reserve a club name.'
+      operationId: 5c9bbd8c3f7d21d1897ae03f774dfa00
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                name:
+                  type: string
+                type:
+                  type: string
+                  enum: [public, private, hidden]
+              type: object
+              example:
+                name: 'My OpenXBL Club'
+                type: public
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/conversations:
+    get:
+      tags:
+        - conversations
+      summary: 'Get your messages.'
+      operationId: 33fd8681d779641fe1516baa54c313ff
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+    post:
+      tags:
+        - conversations
+      summary: 'Send a message.'
+      operationId: bad6611a4ff5f766d3891766d77ba24f
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                message:
+                  type: string
+                xuid:
+                  type: string
+              type: object
+              example:
+                message: 'This is an example!'
+                xuid: '2535473210914202'
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/conversations/requests:
+    get:
+      tags:
+        - conversations
+      summary: 'List of invites.'
+      operationId: 573c41c59c657b98439bea5f87b7aae3
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/dvr/screenshots:
+    get:
+      tags:
+        - dvr
+      summary: 'Get your screenshots.'
+      operationId: c3bab118e0a67eafdbada17ef240acc4
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/dvr/gameclips:
+    get:
+      tags:
+        - dvr
+      summary: 'Get your game clips.'
+      operationId: c0e7f2ca909b1bdab35aac17741ae11c
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  '/api/v2/dvr/gameclips/delete/{gameClipId}':
+    get:
+      tags:
+        - dvr
+      summary: 'Delete a game clip.'
+      operationId: 443192f909e9fd1977b189b8f8d77ecf
+      parameters:
+        -
+          name: gameClipId
+          in: path
+          description: 'Game Clip ID'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/dvr/privacy:
+    post:
+      tags:
+        - dvr
+      summary: 'Set the privacy setting for media content.'
+      description: 'Acceptable values are Everyone, PeopleOnMyList, Blocked'
+      operationId: c5b36c2d4295e29510ff714b4de691d5
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                value:
+                  type: string
+                  enum: [Everyone, PeopleOnMyList, Blocked]
+              type: object
+              example:
+                value: PeopleOnMyList
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/friends:
+    get:
+      tags:
+        - friends
+      summary: 'Get your friends list.'
+      operationId: 75fbf3ce54e0e950991f6c44daf47125
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  '/api/v2/friends/search/{gamertag}':
+    get:
+      tags:
+        - friends
+      summary: 'Search your friends list.'
+      operationId: 656278c4c78f77b03db603aa9b9cc355
+      parameters:
+        -
+          name: gamertag
+          in: path
+          description: Gamertag
+          required: true
+          schema:
+            type: string
+          examples:
+            string:
+              summary: 'A gamertag.'
+              value: xTACTICSx
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/friends/add:
+    post:
+      tags:
+        - friends
+      summary: 'Add friend(s).'
+      operationId: a0e0865510e01c231516fe5e445dc9c2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                xuid:
+                  type: string
+              type: object
+              example:
+                xuids: '2535473210914202,2533274791718062'
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/friends/remove:
+    post:
+      tags:
+        - friends
+      summary: 'Remove friend.'
+      operationId: eb57e4ca41db7bcb7e87f816dd3a5b09
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                xuid:
+                  type: string
+              type: object
+              example:
+                xuid: '2535473210914202'
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/recent-players:
+    get:
+      tags:
+        - friends
+      summary: 'List recently played players.'
+      operationId: 662d19de46c610aab79be64af713d73c
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/friends/favorite:
+    post:
+      tags:
+        - friends
+      summary: 'Add favorites.'
+      operationId: c2345a18b88a53103a7adc62b28673cb
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                xuids:
+                  type: array
+                  items: { type: string }
+              type: object
+              example:
+                xuids:
+                  - 2535473210914202
+                  - 2535473210914202
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  '/api/v2/friends/favorite/{method}':
+    post:
+      tags:
+        - friends
+      summary: 'Add favorites.'
+      operationId: d3a33576a1fb33c3d120e70e47d1711d
+      parameters:
+        -
+          name: method
+          in: path
+          description: 'The method.'
+          required: true
+          schema:
+            type: string
+          examples:
+            string:
+              summary: Method
+              value: add
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                xuids:
+                  type: array
+                  items: { type: string }
+              type: object
+              example:
+                xuids:
+                  - 2535473210914202
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/gamepass/all:
+    get:
+      tags:
+        - gamepass
+      summary: 'Return list of all Game Pass Games.'
+      operationId: 9aebe45cd6109cfb7241da18bcf075f5
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/gamepass/pc:
+    get:
+      tags:
+        - marketplace
+      summary: 'Return list of PC  Games.'
+      operationId: f06d8ba143b9ac8800d50f13d5699803
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/gamepass/ea=play:
+    get:
+      tags:
+        - marketplace
+      summary: 'Return list of EA Play Games.'
+      operationId: 938566ba1bf50002b2409d2fc597d71f
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/gamepass/no-controller:
+    get:
+      tags:
+        - gamepass
+      summary: 'Return list of Games with no controller.'
+      operationId: 9b1c7e981889ec9387a278c35f36c628
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/group:
+    get:
+      tags:
+        - group
+      summary: 'Get all your group conversations.'
+      operationId: c003741e674d8449a00061b135b853ff
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/group/create:
+    post:
+      tags:
+        - group
+      summary: 'Create a new group conversation.'
+      operationId: f3b76d53169777ec5d5078b0f0bbd590
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                participants:
+                  type: array
+                  items: { type: integer }
+              type: object
+              example:
+                participants:
+                  - 2535473210914202
+                  - 2533274791718062
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/group/send:
+    post:
+      tags:
+        - group
+      summary: 'Send a message to a group conversation.'
+      operationId: 9fbc33fa1688d845fc1584756b09105e
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                message:
+                  type: string
+                groupId:
+                  type: string
+              type: object
+              example:
+                message: 'This is a test'
+                groupId: '3379844753052055'
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  '/api/v2/group/summary/{groupId}':
+    get:
+      tags:
+        - group
+      summary: 'Get a summary of a group conversation.'
+      operationId: 973751c1edd1f51b606f8b1adfc1b2ea
+      parameters:
+        -
+          name: groupId
+          in: path
+          description: 'The group id.'
+          required: true
+          schema:
+            type: string
+          examples:
+            string:
+              summary: 'Group ID'
+              value: '3379844753052055'
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  '/api/v2/group/messages/{groupId}':
+    get:
+      tags:
+        - group
+      summary: 'List group messages.'
+      operationId: 194d49eb84e6344e0d95c8a76bb5db2a
+      parameters:
+        -
+          name: groupId
+          in: path
+          description: 'The group id.'
+          required: true
+          schema:
+            type: string
+          examples:
+            string:
+              summary: 'Group ID'
+              value: '3379844753052055'
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/group/invite/voice:
+    post:
+      tags:
+        - group
+      summary: 'Invite to voice chat.'
+      operationId: 1572fea043009083cee51ab4fd5bc4c1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                groupId:
+                  type: string
+              type: object
+              example:
+                groupId: '3379844753052055'
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/group/invite:
+    post:
+      tags:
+        - group
+      summary: 'Invite to voice chat.'
+      operationId: 9a0f8aa83b92589e218218a74ee79483
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                groupId:
+                  type: string
+                participants:
+                  type: array
+                  items: { type: integer }
+              type: object
+              example:
+                participants:
+                  - 2535473210914202
+                  - 2533274791718062
+                groupId: '3379844753052055'
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/group/kick:
+    post:
+      tags:
+        - group
+      summary: 'Remove a user from group conversation.'
+      operationId: 7ad337a16411de6dc24d0c26123bf847
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                groupId:
+                  type: string
+                xuid:
+                  type: string
+              type: object
+              example:
+                xuid: '2535473210914202'
+                groupId: '3379844753052055'
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/group/leave:
+    post:
+      tags:
+        - group
+      summary: 'Leave a group conversation.'
+      operationId: a0e913de515d4743bdf0b317e50134b5
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                groupId:
+                  type: string
+              type: object
+              example:
+                groupId: '3379844753052055'
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/marketplace/new:
+    get:
+      tags:
+        - marketplace
+      summary: 'Return list of New Games.'
+      operationId: 664b214ad58c4876cb2baafe77897685
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/marketplace/top-paid:
+    get:
+      tags:
+        - marketplace
+      summary: 'Return list of Top Paid Games.'
+      operationId: b1fb7939b35a558a3a871454cd191b28
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/marketplace/best-rated:
+    get:
+      tags:
+        - marketplace
+      summary: 'Return list of Best Rated Games.'
+      operationId: 9ab947262ea2b83ca8b566fe3b5a24bd
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/marketplace/coming-soon:
+    get:
+      tags:
+        - marketplace
+      summary: 'Return list of Coming Soon Games.'
+      operationId: 7d1d4c854b72e34243f42a8f8e3fab18
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/marketplace/deals:
+    get:
+      tags:
+        - marketplace
+      summary: 'Return list of Deals.'
+      operationId: 8bd266cc5c284039f7bd8eb411a858c9
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/marketplace/top-free:
+    get:
+      tags:
+        - marketplace
+      summary: 'Return list of Top Free Games.'
+      operationId: 11a79d0751785cbd3b59e236709a92a4
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/marketplace/most-played:
+    get:
+      tags:
+        - marketplace
+      summary: 'Return list of Most Played Games.'
+      operationId: b1c05fa05a5cbf96ab9538e643e27aca
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/marketplace/details:
+    post:
+      tags:
+        - marketplace
+      summary: 'Return list Game details.'
+      operationId: bab091cae390e77a5cfa57872a0994e5
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                products:
+                  type: string
+              type: object
+              example:
+                products: '9P0617LN3SF9,9NL4KTK0N4CG'
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/player/summary:
+    get:
+      tags:
+        - player
+      summary: 'Get player summary.'
+      operationId: 2f64ac4486ae644c3ec1c03007f6a0ae
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  '/api/v2/player/summary/{xuid}':
+    get:
+      tags:
+        - player
+      summary: 'Get player summary by XUID.'
+      operationId: cc1a32e620cb9705d52820b313365155
+      parameters:
+        -
+          name: xuid
+          in: path
+          description: XUID
+          required: true
+          schema:
+            type: string
+          examples:
+            string:
+              summary: XUID
+              value: '2535473210914202'
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/player/stats:
+    post:
+      tags:
+        - player
+      summary: 'Request for multiple player statistics across titles.'
+      operationId: 3aedfbbd73c5d6ada3cd676aa0952b24
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                xuids:
+                  type: array
+                  items: { properties: { xuid: { type: string, example: '' } }, type: object }
+                  example: ['2535473210914202']
+                groups:
+                  type: array
+                  items: { properties: { name: { type: string, example: '' }, titleId: { type: string, example: '' } }, type: object }
+                  example: [{ name: Hero, titleId: '1810924247' }]
+                stats:
+                  type: array
+                  items: { properties: { name: { type: string, example: '' }, titleId: { type: string, example: '' } }, type: object }
+                  example: [{ name: MinutesPlayed, titleId: '1810924247' }]
+              type: object
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/player/titleHistory:
+    get:
+      tags:
+        - player
+      summary: 'Get player title history.'
+      operationId: 887359f8f2e728c437509d1e0b75b2c0
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  '/api/v2/player/titleHistory/{xuid}':
+    get:
+      tags:
+        - player
+      summary: 'Get player title history by XUID.'
+      operationId: 35307ef7f7fa342d70aff55009bc37ca
+      parameters:
+        -
+          name: xuid
+          in: path
+          description: XUID
+          required: true
+          schema:
+            type: string
+          examples:
+            string:
+              summary: XUID
+              value: '2535473210914202'
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/session:
+    get:
+      tags:
+        - session
+      summary: 'Returns list of current sessions.'
+      operationId: 32171a5a7ef67980692fa61ebaee421e
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  '/api/v2/session/invite/{sessionId}':
+    post:
+      tags:
+        - session
+      summary: 'Invite a player to a party chat.'
+      operationId: cc9fe8a22f163c683b0657fcda0c7cd5
+      parameters:
+        -
+          name: sessionId
+          in: path
+          description: 'Session ID'
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                xuid:
+                  type: string
+                sessionName:
+                  type: string
+              type: object
+              example:
+                xuid: '3379844753052055'
+                sessionName: ef73fa5a-bfa8-4f1b-bf31-66c1b6819d84
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/session/create:
+    get:
+      tags:
+        - session
+      summary: 'Creates a new chat session.'
+      description: 'Start a party chat on a device and then query the /session endpoint. You will see the connected session id will match the session you created here. Additionally you can take this session information and automate the process by inviting users to it.'
+      operationId: cb7160c48d32da9a857688d2d25dd0bd
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+  /api/v2/session/config:
+    get:
+      tags:
+        - session
+      summary: 'Returns configuration values.'
+      operationId: 4ad530943b80d8dea2da834a2e476ec7
+      responses:
+        '200':
+          description: Success
+      security:
+        -
+          api_key: []
+components:
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: x-authorization
+      in: header
+tags:
+  -
+    name: account
+  -
+    name: achievements
+  -
+    name: activity
+  -
+    name: clubs
+  -
+    name: conversations
+  -
+    name: dvr
+  -
+    name: friends
+  -
+    name: gamepass
+  -
+    name: friends
+  -
+    name: marketplace
+  -
+    name: player
+  -
+    name: session
